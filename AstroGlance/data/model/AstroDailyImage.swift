@@ -12,10 +12,10 @@ struct AstroDailyImage: Identifiable, Decodable {
     let copyright: String?
     let date: String
     let explanation: String
-    let hdurl: String
+    let hdurl: String?
     let mediaType: String
     let title: String
-    let url: String
+    let url: String?
 
     enum CodingKeys: String, CodingKey {
         case copyright, date, explanation, hdurl

@@ -8,15 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		AF2F0AEB2DF6305E00E2756F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AF2F0AEA2DF6305E00E2756F /* Kingfisher */; };
+		AF4760F62DF784CA004F6AFF /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AF4760F52DF784CA004F6AFF /* Secrets.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AF2F0ACC2DF6122300E2756F /* AstroGlance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AstroGlance.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF4760F52DF784CA004F6AFF /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AF4760F82DF78656004F6AFF /* Exceptions for "AstroGlance" folder in "AstroGlance" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AF2F0ACB2DF6122300E2756F /* AstroGlance */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AF2F0ACE2DF6122300E2756F /* AstroGlance */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AF4760F82DF78656004F6AFF /* Exceptions for "AstroGlance" folder in "AstroGlance" target */,
+			);
 			path = AstroGlance;
 			sourceTree = "<group>";
 		};
@@ -37,6 +52,7 @@
 		AF2F0AC32DF6122300E2756F = {
 			isa = PBXGroup;
 			children = (
+				AF4760F52DF784CA004F6AFF /* Secrets.xcconfig */,
 				AF2F0ACE2DF6122300E2756F /* AstroGlance */,
 				AF2F0ACD2DF6122300E2756F /* Products */,
 			);
@@ -118,6 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF4760F62DF784CA004F6AFF /* Secrets.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +153,7 @@
 /* Begin XCBuildConfiguration section */
 		AF2F0AD82DF6122400E2756F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF4760F52DF784CA004F6AFF /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -199,6 +217,7 @@
 		};
 		AF2F0AD92DF6122400E2756F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF4760F52DF784CA004F6AFF /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -255,6 +274,7 @@
 		};
 		AF2F0ADB2DF6122400E2756F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF4760F52DF784CA004F6AFF /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -263,6 +283,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"AstroGlance/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AstroGlance/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -283,6 +304,7 @@
 		};
 		AF2F0ADC2DF6122400E2756F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF4760F52DF784CA004F6AFF /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -291,6 +313,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"AstroGlance/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AstroGlance/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

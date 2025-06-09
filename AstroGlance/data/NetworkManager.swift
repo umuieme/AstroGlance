@@ -1,0 +1,44 @@
+//
+//  NetworkManager.swift
+//  AstroGlance
+//
+//  Created by Umesh Basnet on 2025-06-09.
+//
+
+import Foundation
+
+class NetworkManager {
+    
+    private  let schema = "https"
+    private  let host = "api.nasa.gov"
+    
+    private let apod = "/planetary/apod"
+    
+    public static let shared  = NetworkManager()
+    
+    func fetchDailyImageList(startDate: String, endDate: String) async throws -> [AstroDailyImage] {
+                var components = URLComponents()
+        components.scheme = schema
+        components.host = host
+        components.path = apod
+
+        components.queryItems = [
+            URLQueryItem(name: "api_key", value: ConfigData.shared.getApiKey()),
+            URLQueryItem(name: "start_date", value: startDate),
+            URLQueryItem(name: "end_date", value: endDate)
+
+        ]
+        guard let url = components.url else {
+                    throw ApiError.invalidUrl
+                }
+        let (data, error) = try await URLSession.shared.data(from: url)
+        do {
+            let decoder = JSONDecoder()
+            return try decoder.decode([AstroDailyImage].self, from: data)
+        } catch let error{
+            throw ApiError.unknownError
+        }
+        
+    }
+    
+}

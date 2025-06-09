@@ -10,30 +10,43 @@ import SwiftUI
 
 struct HomeScreen: View {
     
+    @StateObject private var homeViewModel = HomeViewModel()
     
     var body: some View {
     
         GeometryReader { geo in
-                   ScrollView(.vertical, showsIndicators: false) {
-                       LazyVStack(spacing: 0) {
-                           ForEach(
-                            DummyData.shared.getDummyAstroImageList()
-                           ) { item in
-                               AstroGlanceItemView(astroImage: item)
-                                                 .frame(width: geo.size.width, height: geo.size.height)
-                                                 .onAppear(){
-                                                     print("zzz ===== ")
-                                                 }
-                                 // make each item fill the screen
-                                 
-                           }
-                       }
-                       
-                   }
-                   // snap to each full-screen “page”
-                   .scrollTargetBehavior(.paging)
+            ZStack {
+                ScrollView(.vertical, showsIndicators: false) {
+                    LazyVStack(spacing: 0) {
+                        ForEach(
+                            homeViewModel.apodList
+                        ) { item in
+                            AstroGlanceItemView(astroImage: item)
+                                .frame(width: geo.size.width, height: geo.size.height)
+                                .task {
+                                    await homeViewModel.onItemChanged(apod: item)
+                                }
+                            // make each item fill the screen
+                            
+                        }
+                        
+                        
+                    }
+                    
+                }
+                // snap to each full-screen “page”
+                .scrollTargetBehavior(.paging)
+                
+                
+                if(homeViewModel.isLoading) {
+                    ProgressView()
+                }
+            }
                }
         .ignoresSafeArea()
+        .task {
+            await homeViewModel.getApodData()
+        }
 
     }
 }

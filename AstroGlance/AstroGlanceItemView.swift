@@ -16,22 +16,7 @@ struct AstroGlanceItemView: View {
         GeometryReader { geo in
 
             ZStack {
-                KFImage
-                    .url(URL(string: astroImage.url))
-                    .setProcessor(
-                        DownsamplingImageProcessor(size: geo.size)
-                    )
-                    .resizable()
-                    .placeholder {
-                        ProgressView().tint(.white)
-                    }
-                    .cancelOnDisappear(true)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(
-                        width: geo.size.width,
-                        height: geo.size.height
-                    )  // full width & height
-                    .clipped()  // crop any overflow
+                AppNetworkImageView(imageUrl: astroImage.url, size: geo.size)
                 VStack {
                     Spacer()
                     VStack(alignment: .leading) {
@@ -39,18 +24,15 @@ struct AstroGlanceItemView: View {
                             .font(.title)
                             .foregroundStyle(.white)
                             .fontWeight(.bold)
-                            .padding(.bottom, 8)
                         if let copyright = astroImage.copyright {
                             Text(copyright)
                                 .font(.title3)
                                 .fontWeight(.bold)
-                                .padding(.bottom, 8)
                                 .foregroundStyle(.white.opacity(0.7))
                         }
                         Text(astroImage.date)
                             .font(.body)
                             .fontWeight(.bold)
-                            .padding(.bottom, 8)
                             .foregroundStyle(.white.opacity(0.7))
                         Text(astroImage.explanation)
                             .lineLimit(3)
