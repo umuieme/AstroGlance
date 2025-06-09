@@ -25,8 +25,8 @@ class NetworkManager {
         components.queryItems = [
             URLQueryItem(name: "api_key", value: ConfigData.shared.getApiKey()),
             URLQueryItem(name: "start_date", value: startDate),
-            URLQueryItem(name: "end_date", value: endDate)
-
+            URLQueryItem(name: "end_date", value: endDate),
+            URLQueryItem(name: "thumbs", value: "true")
         ]
         guard let url = components.url else {
                     throw ApiError.invalidUrl

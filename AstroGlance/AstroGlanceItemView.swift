@@ -16,7 +16,10 @@ struct AstroGlanceItemView: View {
         GeometryReader { geo in
 
             ZStack {
-                AppNetworkImageView(imageUrl: astroImage.url, size: geo.size)
+                AppNetworkImageView(
+                    imageUrl: astroImage.imageUrl,
+                    size: geo.size
+                )
                 VStack {
                     Spacer()
                     VStack(alignment: .leading) {

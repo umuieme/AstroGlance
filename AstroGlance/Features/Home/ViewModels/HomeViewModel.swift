@@ -12,7 +12,7 @@ import Foundation
     @Published var apodList: [AstroDailyImage] = []
     @Published var isLoading = false
 
-    private let intervalDays = -14
+    private let intervalDays = -5
     /// The current “window” we’re fetching:
     private var endDate: Date
     private var startDate: Date
@@ -67,9 +67,24 @@ import Foundation
     }
     
     func onItemChanged(apod: AstroDailyImage) async {
-        if(apod.id == apodList[apodList.endIndex - 2].id) {
+        guard !isLoading else { return }
+
+        guard let date = dateFormatter.date(from: apod.date) else  {
+            return
+        }
+        
+        guard let threshold = Calendar.current.date(
+            byAdding: .day,
+            value: 3,
+            to: endDate // we use end date here as end date is changed right after data fetch
+        ) else {
+            return
+        }
+        
+        if (date < threshold) {
             await getApodData()
         }
+                
     }
 
 }

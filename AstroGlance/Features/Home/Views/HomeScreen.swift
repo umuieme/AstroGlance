@@ -9,11 +9,11 @@ import Kingfisher
 import SwiftUI
 
 struct HomeScreen: View {
-    
+
     @StateObject private var homeViewModel = HomeViewModel()
-    
+
     var body: some View {
-    
+
         GeometryReader { geo in
             ZStack {
                 ScrollView(.vertical, showsIndicators: false) {
@@ -22,27 +22,26 @@ struct HomeScreen: View {
                             homeViewModel.apodList
                         ) { item in
                             AstroGlanceItemView(astroImage: item)
-                                .frame(width: geo.size.width, height: geo.size.height)
+                                .frame(
+                                    width: geo.size.width,
+                                    height: geo.size.height
+                                )
                                 .task {
-                                    await homeViewModel.onItemChanged(apod: item)
+                                    await homeViewModel.onItemChanged(
+                                        apod: item)
                                 }
-                            // make each item fill the screen
-                            
                         }
-                        
-                        
+
                     }
-                    
+
                 }
-                // snap to each full-screen “page”
                 .scrollTargetBehavior(.paging)
-                
-                
-                if(homeViewModel.isLoading) {
+
+                if homeViewModel.isLoading {
                     ProgressView()
                 }
             }
-               }
+        }
         .ignoresSafeArea()
         .task {
             await homeViewModel.getApodData()

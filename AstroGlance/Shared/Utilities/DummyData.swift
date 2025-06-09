@@ -21,7 +21,7 @@ class DummyData {
             hdurl: "https://apod.nasa.gov/apod/image/2506/Arp273Main_HubblePestana_3079.jpg",
             mediaType: "image",
             title: "UGC 1810: Wildly Interacting Galaxy from Hubble",
-            url: "https://apod.nasa.gov/apod/image/2506/Arp273Main_HubblePestana_1080.jpg"
+            url: "https://apod.nasa.gov/apod/image/2506/Arp273Main_HubblePestana_1080.jpg", thumbnailUrl: nil
         )
     }
     

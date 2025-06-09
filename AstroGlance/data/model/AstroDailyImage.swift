@@ -16,10 +16,19 @@ struct AstroDailyImage: Identifiable, Decodable {
     let mediaType: String
     let title: String
     let url: String?
+    let thumbnailUrl: String?
 
     enum CodingKeys: String, CodingKey {
-        case copyright, date, explanation, hdurl
+        case copyright, date, explanation, hdurl, title, url
         case mediaType = "media_type"
-        case title, url
+        case thumbnailUrl = "thumbnail_url"
     }
+    
+    var imageUrl: String? {
+        if (mediaType == "video"){
+            return thumbnailUrl
+        }
+        return url;
+    }
+
 }
