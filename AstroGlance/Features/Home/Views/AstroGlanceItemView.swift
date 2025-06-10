@@ -11,10 +11,15 @@ import SwiftUI
 struct AstroGlanceItemView: View {
 
     let astroImage: AstroDailyImage
-    @State var showDetailModal = false
-
-    @State var shouldHideText = false
-
+    @StateObject private var viewModel : AstroGralnceItemViewModel
+    
+    init(astroImage: AstroDailyImage) {
+        self.astroImage = astroImage
+        _viewModel = StateObject(
+            wrappedValue:  AstroGralnceItemViewModel(apod: astroImage)
+        )
+    }
+    
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -24,17 +29,31 @@ struct AstroGlanceItemView: View {
                 )
                 .onTapGesture {
                     withAnimation(.easeInOut) {
-                        shouldHideText.toggle()
+                        viewModel.shouldHideText.toggle()
                     }
                 }
                 VStack {
                     Spacer()
-                    if !shouldHideText {
+                    if !viewModel.shouldHideText {
                         VStack(alignment: .leading) {
-                            Text(astroImage.title)
-                                .font(.title)
-                                .foregroundStyle(.white)
-                                .fontWeight(.bold)
+                           
+                            HStack {
+                                Text(astroImage.title)
+                                    .font(.title)
+                                    .foregroundStyle(.white)
+                                    .lineLimit(2)
+                                    .fontWeight(.bold)
+                                Spacer(minLength: 10)
+                                if(astroImage.hdurl != nil){
+                                    DownloadButton(
+                                        status: viewModel.downloadStatus) {
+                                            Task {
+                                                await viewModel.downloadImage()
+                                            }
+                                            
+                                        }
+                                }
+                            }
                             Text(astroImage.date)
                                 .font(.body)
                                 .fontWeight(.bold)
@@ -44,7 +63,7 @@ struct AstroGlanceItemView: View {
                                 .font(.title3)
                                 .foregroundStyle(.white)
                                 .onTapGesture {
-                                    showDetailModal = true
+                                    viewModel.showDetailModal = true
                                 }
 
                             Spacer()
@@ -65,7 +84,7 @@ struct AstroGlanceItemView: View {
                 }
                 .padding(0)
                 .frame(width: geo.size.width, height: geo.size.height)
-                .sheet(isPresented: $showDetailModal) {
+                .sheet(isPresented: $viewModel.showDetailModal) {
                     ApodDescriptionBottomSheet(apod: astroImage)
                 }
 
@@ -75,6 +94,11 @@ struct AstroGlanceItemView: View {
         .ignoresSafeArea()
         .foregroundStyle(.white)
         .background(.black)
+        .alert("Image Download", isPresented: $viewModel.showingAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text(viewModel.alertMessage)
+                }
 
     }
 }
