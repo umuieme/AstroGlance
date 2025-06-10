@@ -1,4 +1,5 @@
-# NASA APOD Viewer (SwiftUI)
+# AstroGlance
+### NASA APOD View (Swift UI)
 
 A SwiftUI app that showcases NASA's Astronomy Picture of the Day (APOD) in a vertical, paginated page view. Browse through daily APOD entries, view detailed explanations, and download images for offline enjoyment.
 
