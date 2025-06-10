@@ -30,5 +30,9 @@ struct AstroDailyImage: Identifiable, Decodable {
         }
         return url;
     }
+    
+    var owner : String? {
+        return copyright?.trimmingCharacters(in: CharacterSet(charactersIn: "\n"))
+    }
 
 }
